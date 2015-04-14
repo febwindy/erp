@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="me.erp.domain.model.permission.Permission" table="gr_permission">
+        <id name="id" column="id" length="32">
+             <generator class="uuid"/>
+        </id>
+        <property name="resource" column="resource" length="50"/>
+        <property name="description" column="describtion" length="255"/>
+
+        <set name="roles" table="gr_role_permission">
+            <key column="permission_id"/>
+            <many-to-many class="me.erp.domain.model.role.Role" column="role_id"/>
+        </set>
+
+    </class>
+</hibernate-mapping>

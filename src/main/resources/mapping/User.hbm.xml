@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="me.erp.domain.model.user.User" table="gr_user">
+        <id name="id" column="id" length="32" type="java.lang.String">
+            <generator class="uuid"/>
+        </id>
+        <property name="username" column="username" length="32" unique="true"/>
+        <property name="realName" column="real_name" length="32"/>
+        <property name="password" column="password" length="32"/>
+        <property name="salt" column="salt" length="32"/>
+        <property name="sex" column="sex"/>
+        <property name="email" column="email" length="32"/>
+        <property name="telephone" column="telephone" length="11"/>
+        <property name="idCard" column="id_card" length="18"/>
+        <property name="organization" column="organization" length="64"/>
+        <property name="createdDate" column="created_date"/>
+        <property name="remark" column="remark" length="255"/>
+
+        <set name="roles" table="gr_user_role">
+            <key column="user_id"/>
+            <many-to-many class="me.erp.domain.model.role.Role" column="role_id"/>
+        </set>
+
+    </class>
+</hibernate-mapping>

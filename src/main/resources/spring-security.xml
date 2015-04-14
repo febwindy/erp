@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd">
+
+<security:http auto-config="false" use-expressions="true" access-denied-page="/denied"
+                   entry-point-ref="entryPoint">
+        <!-- 对登录页面，所有的用户都可以访问 -->
+        <security:intercept-url pattern="/resources/**" access="permitAll"/>
+        <security:intercept-url pattern="/auth/login" access="permitAll"/>
+        <!-- 自定义表单过滤 -->
+        <security:custom-filter ref="formLoginFilter" position="FORM_LOGIN_FILTER"/>
+        <security:custom-filter ref="CustomFilterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR"/>
+        <!-- 登出 -->
+        <security:logout invalidate-session="true" logout-success-url="/" logout-url="/logout"/>
+        <!-- session过期后操作 -->
+        <security:session-management invalid-session-url="/">
+            <security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true"/>
+        </security:session-management>
+    </security:http>
+
+    <!-- 认证管理器 -->
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider user-service-ref="userDetailsService">
+            <security:password-encoder ref="passwordEncoder">
+                <security:salt-source user-property="salt"/>
+            </security:password-encoder>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <!-- 未登录时的切入点 -->
+    <bean id="entryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <property name="loginFormUrl" value="/" />
+    </bean>
+
+    <!-- 加密方式 -->
+    <bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder">
+        <property name="encodeHashAsBase64" value="false"/>
+    </bean>
+
+    <!-- 自定义userDetailsService -->
+    <bean id="userDetailsService" class="me.erp.application.security.UserDetailsServiceImpl"/>
+
+    <!-- 自定义表单验证 -->
+    <bean id="formLoginFilter" class="me.erp.application.security.LoginUsernamePasswordAuthenticationFilter">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="usernameParameter" value="username"/>
+        <property name="passwordParameter" value="password"/>
+        <property name="filterProcessesUrl" value="/login_check"/>
+        <property name="authenticationSuccessHandler" ref="successHandler"/>
+        <property name="authenticationFailureHandler" ref="failureHandler"/>
+        <property name="md5PasswordEncoder" ref="passwordEncoder"/>
+    </bean>
+
+    <!-- 表单验证成功跳转 -->
+    <bean id="successHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+        <property name="alwaysUseDefaultTargetUrl" value="true"/>
+        <property name="defaultTargetUrl" value="/auth/login"/>
+    </bean>
+
+    <!-- 表单验证失败跳转 -->
+    <bean id="failureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <property name="defaultFailureUrl" value="/auth/failed"/>
+    </bean>
+
+    <bean id="CustomFilterSecurityInterceptor" class="me.erp.application.security.CustomFilterSecurityInterceptor">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="accessDecisionManager" ref="accessDecisionManager"/>
+        <property name="securityMetadataSource" ref="securityMetadataSource"/>
+    </bean>
+
+    <bean id="accessDecisionManager" class="me.erp.application.security.CustomAccessDecisionManager"/>
+    <bean id="securityMetadataSource" class="me.erp.application.security.CustomInvocationSecurityMetadataSource"
+          init-method="loadResourceDefine"/>
+
+    <!-- urlMatcher -->
+    <bean id="pathMatcher" class="org.springframework.util.AntPathMatcher"/>
+
+</beans>
