@@ -35,7 +35,7 @@ public class IndexController {
             return new ModelAndView("redirect:/index");
         }
 
-        return new ModelAndView("/index");
+        return new ModelAndView("/login");
     }
 
     @RequestMapping(value = "/index")
@@ -43,17 +43,17 @@ public class IndexController {
         return new ModelAndView("/index");
     }
 
-    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView signUp() throws Exception {
         Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (obj instanceof SaltUser) {
             return new ModelAndView("redirect:/index");
         }
 
-        return new ModelAndView("/signup");
+        return new ModelAndView("/register");
     }
 
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView signUp(@Valid @ModelAttribute("user")CreateUserCommand command, BindingResult bindingResult) throws Exception {
 
         User repeatUser = userService.findByUsername(command.getUsername());
@@ -66,7 +66,7 @@ public class IndexController {
         }
 
         if (bindingResult.hasErrors()) {
-            return new ModelAndView("/signup", "user", command);
+            return new ModelAndView("/register", "user", command);
         }
 
         userVerifiedService.create(command);

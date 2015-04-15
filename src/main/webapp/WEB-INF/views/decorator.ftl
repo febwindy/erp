@@ -63,55 +63,56 @@
 </head>
 
 [@block name="specialBody"]
-<body class="skin-blue">
+    <body class="skin-blue">
 [/@block]
-    [@block name="header"]
-        [#include "/shared/header.ftl" /]
-    [/@block]
 
-    <div class="wrapper row-offcanvas row-offcanvas-left">
-        [@block name="sidebar"]
-            [#include "/shared/sidebar.ftl" /]
+        [@block name="header"]
+            [#include "/shared/header.ftl" /]
         [/@block]
 
-        [@block name="content"]
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+            [@block name="sidebar"]
+                [#include "/shared/sidebar.ftl" /]
+            [/@block]
+
+            [@block name="content"]
+
+            [/@block]
+        </div>
+
+        [@block name="bottomResources"]
+
+            <!-- jQuery 2.0.2 -->
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+            <!-- jQuery UI 1.10.3 -->
+            <script src="[@spring.url '/resources/js/jquery-ui-1.10.3.min.js'/]" type="text/javascript"></script>
+            <!-- Bootstrap -->
+            <script src="[@spring.url '/resources/js/bootstrap.min.js'/]" type="text/javascript"></script>
+            <!-- Morris.js charts -->
+            <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+            <script src="[@spring.url '/resources/js/plugins/morris/morris.min.js'/]" type="text/javascript"></script>
+            <!-- Sparkline -->
+            <script src="[@spring.url '/resources/js/plugins/sparkline/jquery.sparkline.min.js'/]" type="text/javascript"></script>
+            <!-- jvectormap -->
+            <script src="[@spring.url '/resources/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'/]" type="text/javascript"></script>
+            <script src="[@spring.url '/resources/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'/]" type="text/javascript"></script>
+            <!-- fullCalendar -->
+            <script src="[@spring.url '/resources/js/plugins/fullcalendar/fullcalendar.min.js'/]" type="text/javascript"></script>
+            <!-- jQuery Knob Chart -->
+            <script src="[@spring.url '/resources/js/plugins/jqueryKnob/jquery.knob.js'/]" type="text/javascript"></script>
+            <!-- daterangepicker -->
+            <script src="[@spring.url '/resources/js/plugins/daterangepicker/daterangepicker.js'/]" type="text/javascript"></script>
+            <!-- Bootstrap WYSIHTML5 -->
+            <script src="[@spring.url '/resources/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'/]" type="text/javascript"></script>
+            <!-- iCheck -->
+            <script src="[@spring.url '/resources/js/plugins/iCheck/icheck.min.js'/]" type="text/javascript"></script>
+
+            <!-- AdminLTE App -->
+            <script src="[@spring.url '/resources/js/AdminLTE/app.js'/]" type="text/javascript"></script>
+
+            <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+            <script src="[@spring.url '/resources/js/AdminLTE/dashboard.js'/]" type="text/javascript"></script>
 
         [/@block]
-    </div>
-
-    [@block name="bottomResources"]
-
-        <!-- jQuery 2.0.2 -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        <!-- jQuery UI 1.10.3 -->
-        <script src="[@spring.url '/resources/js/jquery-ui-1.10.3.min.js'/]" type="text/javascript"></script>
-        <!-- Bootstrap -->
-        <script src="[@spring.url '/resources/js/bootstrap.min.js'/]" type="text/javascript"></script>
-        <!-- Morris.js charts -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="[@spring.url '/resources/js/plugins/morris/morris.min.js'/]" type="text/javascript"></script>
-        <!-- Sparkline -->
-        <script src="[@spring.url '/resources/js/plugins/sparkline/jquery.sparkline.min.js'/]" type="text/javascript"></script>
-        <!-- jvectormap -->
-        <script src="[@spring.url '/resources/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'/]" type="text/javascript"></script>
-        <script src="[@spring.url '/resources/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'/]" type="text/javascript"></script>
-        <!-- fullCalendar -->
-        <script src="[@spring.url '/resources/js/plugins/fullcalendar/fullcalendar.min.js'/]" type="text/javascript"></script>
-        <!-- jQuery Knob Chart -->
-        <script src="[@spring.url '/resources/js/plugins/jqueryKnob/jquery.knob.js'/]" type="text/javascript"></script>
-        <!-- daterangepicker -->
-        <script src="[@spring.url '/resources/js/plugins/daterangepicker/daterangepicker.js'/]" type="text/javascript"></script>
-        <!-- Bootstrap WYSIHTML5 -->
-        <script src="[@spring.url '/resources/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'/]" type="text/javascript"></script>
-        <!-- iCheck -->
-        <script src="[@spring.url '/resources/js/plugins/iCheck/icheck.min.js'/]" type="text/javascript"></script>
-
-        <!-- AdminLTE App -->
-        <script src="[@spring.url '/resources/js/AdminLTE/app.js'/]" type="text/javascript"></script>
-
-        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="[@spring.url '/resources/js/AdminLTE/dashboard.js'/]" type="text/javascript"></script>
-
-    [/@block]
-</body>
+    </body>
 </html>

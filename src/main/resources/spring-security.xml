@@ -7,10 +7,15 @@
        http://www.springframework.org/schema/security
        http://www.springframework.org/schema/security/spring-security.xsd">
 
-<security:http auto-config="false" use-expressions="true" access-denied-page="/denied"
+    <security:http auto-config="false" use-expressions="true" access-denied-page="/denied"
                    entry-point-ref="entryPoint">
         <!-- 对登录页面，所有的用户都可以访问 -->
-        <security:intercept-url pattern="/resources/**" access="permitAll"/>
+        <security:intercept-url pattern="/resources/img/**" access="permitAll"/>
+        <security:intercept-url pattern="/resources/css/**" access="permitAll"/>
+        <security:intercept-url pattern="/resources/js/**" access="permitAll"/>
+        <security:intercept-url pattern="/resources/less/**" access="permitAll"/>
+        <security:intercept-url pattern="/resources/fonts/**" access="permitAll"/>
+
         <security:intercept-url pattern="/auth/login" access="permitAll"/>
         <!-- 自定义表单过滤 -->
         <security:custom-filter ref="formLoginFilter" position="FORM_LOGIN_FILTER"/>

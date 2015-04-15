@@ -409,7 +409,7 @@
                         <div class="box-body chat" id="chat-box">
                             <!-- chat item -->
                             <div class="item">
-                                <img src="img/avatar.png" alt="user image" class="online"/>
+                                <img src="/resources/img/avatar.png" alt="user image" class="online"/>
 
                                 <p class="message">
                                     <a href="#" class="name">
@@ -436,7 +436,7 @@
                             <!-- /.item -->
                             <!-- chat item -->
                             <div class="item">
-                                <img src="img/avatar2.png" alt="user image" class="offline"/>
+                                <img src="/resources/img/avatar2.png" alt="user image" class="offline"/>
 
                                 <p class="message">
                                     <a href="#" class="name">
@@ -451,7 +451,7 @@
                             <!-- /.item -->
                             <!-- chat item -->
                             <div class="item">
-                                <img src="img/avatar3.png" alt="user image" class="offline"/>
+                                <img src="/resources/img/avatar3.png" alt="user image" class="offline"/>
 
                                 <p class="message">
                                     <a href="#" class="name">

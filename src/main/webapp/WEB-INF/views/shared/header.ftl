@@ -29,7 +29,7 @@
                                 <li><!-- start message -->
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="../resources/img/avatar3.png" class="img-circle" alt="User Image"/>
+                                            <img src="/resources/img/avatar3.png" class="img-circle" alt="User Image"/>
                                         </div>
                                         <h4>
                                             Support Team
