@@ -53,6 +53,9 @@
         <!-- Theme style -->
         <link href="[@spring.url '/resources/css/AdminLTE.css'/]" rel="stylesheet" type="text/css" />
 
+        <!-- self style -->
+        <link href="[@spring.url '/resources/css/self/commons.css'/]" rel="stylesheet" type="text/css"/>
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -75,9 +78,11 @@
                 [#include "/shared/sidebar.ftl" /]
             [/@block]
 
-            [@block name="content"]
+            <aside class="right-side">
+                [@block name="content"]
 
-            [/@block]
+                [/@block]
+            </aside>
         </div>
 
         [@block name="bottomResources"]
@@ -112,6 +117,9 @@
 
             <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
             <script src="[@spring.url '/resources/js/AdminLTE/dashboard.js'/]" type="text/javascript"></script>
+
+            <!-- self js -->
+            <script src="[@spring.url '/resources/js/commons.js'/]" type="text/javascript"></script>
 
         [/@block]
     </body>

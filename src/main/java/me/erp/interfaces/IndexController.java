@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -44,17 +45,19 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public ModelAndView signUp() throws Exception {
+    public ModelAndView signUp(@ModelAttribute("user")CreateUserCommand command) throws Exception {
         Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (obj instanceof SaltUser) {
             return new ModelAndView("redirect:/index");
         }
 
-        return new ModelAndView("/register");
+        return new ModelAndView("/register", "user", command);
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ModelAndView signUp(@Valid @ModelAttribute("user")CreateUserCommand command, BindingResult bindingResult) throws Exception {
+    public ModelAndView signUp(@Valid @ModelAttribute("user")CreateUserCommand command,
+                               BindingResult bindingResult,
+                               RedirectAttributes redirectAttributes) throws Exception {
 
         User repeatUser = userService.findByUsername(command.getUsername());
         if (null != repeatUser) {
@@ -69,7 +72,15 @@ public class IndexController {
             return new ModelAndView("/register", "user", command);
         }
 
-        userVerifiedService.create(command);
+        try {
+            userVerifiedService.create(command);
+        } catch (Exception e) {
+            return new ModelAndView("/register", "user", command)
+                    .addObject("message", "该用户名[" + command.getUsername() + "]已存在");
+        }
+
+        redirectAttributes.addFlashAttribute("success", "用户注册成功");
+
         return new ModelAndView("redirect:/");
     }
 

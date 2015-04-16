@@ -24,7 +24,7 @@
             <form action="/login_check" method="post">
                 <div class="body bg-gray">
                     <div class="form-group">
-                        <span style="color: red;">${error}</span>
+                        <span style="color: red;">${error}${success}</span>
                     </div>
                     <div class="form-group">
                         <input type="text" name="username" class="form-control" placeholder="用户名"/>

@@ -51,8 +51,8 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ModelAndView create() throws Exception {
-        return new ModelAndView("/user/create");
+    public ModelAndView create(@ModelAttribute("user")CreateUserCommand command) throws Exception {
+        return new ModelAndView("/user/create", "user", command);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
