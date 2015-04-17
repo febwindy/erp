@@ -46,6 +46,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         SaltUser saltUser = new SaltUser(
                 user.getId(),
                 user.getUsername(),
+                user.getRealName(),
                 user.getPassword(),
                 gaRoles,
                 user.getSalt()

@@ -601,5 +601,10 @@
 
 [@override name="bottomResources"]
     [@super /]
+    <!-- Morris.js charts -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="[@spring.url '/resources/js/plugins/morris/morris.min.js'/]" type="text/javascript"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="[@spring.url '/resources/js/AdminLTE/dashboard.js'/]" type="text/javascript"></script>
 [/@override]
 [@extends name="/decorator.ftl"/]

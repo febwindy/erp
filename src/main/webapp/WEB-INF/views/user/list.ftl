@@ -17,8 +17,25 @@
         </ol>
     </section>
 
-    <section class="content margin-lr-10">
+    <section class="content margin-lr-10 thumbnail">
         <div class="row">
+            <form class="form-inline">
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        <label for="username">用户名:</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control pull-left" id="username" name="username" placeholder="请输入用户名"
+                               value="${user.username}">
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="submit" class="btn btn-success">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <br/>
             <table class="table table-hover">
                 <tr>
                     <th>编号</th>
@@ -49,6 +66,7 @@
                                 <td>${user.createdDate}</td>
                                 <td>
                                     <a class="btn btn-success" href="/user/view/${user.id}">查看</a>
+                                    <a class="btn btn-info" href="/user/edit/${user.id}">编辑</a>
                                     <a class="btn btn-danger" href="/user/delete/${user.id}">删除</a>
                                     <a class="btn btn-primary" href="/user/authorization/${user.id}">授权角色</a>
                                 </td>
@@ -58,6 +76,7 @@
                 [/#if]
             </table>
         </div>
+        [@mc.showPagination '/user/list?username=${username}' /]
     </section>
 [/@override]
 

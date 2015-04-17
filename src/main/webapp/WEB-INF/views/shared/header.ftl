@@ -26,7 +26,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">个人信息</a>
+                                <a href="/user/person_info" class="btn btn-default btn-flat">个人信息</a>
                             </div>
                             <div class="pull-right">
                                 <a href="/logout" class="btn btn-default btn-flat">退出</a>

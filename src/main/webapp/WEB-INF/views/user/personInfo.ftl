@@ -8,12 +8,12 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        用户管理
-        <small>用户详情</small>
+        个人信息
+        <small>个人信息查看</small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="/user/list"><i class="fa fa-user"></i> 用户管理</a></li>
-        <li class="active">用户详情</li>
+        <li><a href="/index"><i class="fa fa-user"></i> 首页</a></li>
+        <li class="active">个人信息查看</li>
     </ol>
 </section>
 
@@ -85,14 +85,27 @@
             </div>
 
             <div class="form-group">
+                <label for="roles" class="col-sm-2 control-label">角色列表</label>
+                <div class="col-sm-9" id="roles">
+                    [#list user.roles as role]
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="${role.id}" onclick="return false;" name="roles" checked/> ${role.description}
+                            </label>
+                        </div>
+                    [/#list]
+                </div>
+            </div>
+
+            <div class="form-group">
                 <div class="col-sm-6">
                     <div class="col-sm-offset-8 col-sm-4">
-                        <a href="/user/create" class="btn btn-block bg-olive">创建</a>
+                        <a href="/user/person_info/edit/${user.id}" class="btn btn-md btn-primary btn-block" type="button">修改</a>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="col-sm-4">
-                        <a href="/user/list" class="btn btn-block btn-danger">返回</a>
+                        <a href="/index" class="btn btn-md btn-danger btn-block" type="button">返回</a>
                     </div>
                 </div>
             </div>

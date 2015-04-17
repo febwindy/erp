@@ -93,9 +93,7 @@
             <script src="[@spring.url '/resources/js/jquery-ui-1.10.3.min.js'/]" type="text/javascript"></script>
             <!-- Bootstrap -->
             <script src="[@spring.url '/resources/js/bootstrap.min.js'/]" type="text/javascript"></script>
-            <!-- Morris.js charts -->
-            <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-            <script src="[@spring.url '/resources/js/plugins/morris/morris.min.js'/]" type="text/javascript"></script>
+
             <!-- Sparkline -->
             <script src="[@spring.url '/resources/js/plugins/sparkline/jquery.sparkline.min.js'/]" type="text/javascript"></script>
             <!-- jvectormap -->
@@ -114,9 +112,6 @@
 
             <!-- AdminLTE App -->
             <script src="[@spring.url '/resources/js/AdminLTE/app.js'/]" type="text/javascript"></script>
-
-            <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-            <script src="[@spring.url '/resources/js/AdminLTE/dashboard.js'/]" type="text/javascript"></script>
 
             <!-- self js -->
             <script src="[@spring.url '/resources/js/commons.js'/]" type="text/javascript"></script>

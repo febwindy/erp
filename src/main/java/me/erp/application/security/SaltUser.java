@@ -14,17 +14,23 @@ public class SaltUser extends User {
 
     private String salt;
 
-    public SaltUser(String id, String username, String password, Collection<? extends GrantedAuthority> authorities, String salt) {
+    private String realName;
+
+    public SaltUser(String id, String username, String realName, String password, Collection<? extends GrantedAuthority> authorities,
+                    String salt) {
         super(username, password, authorities);
         this.id = id;
         this.salt = salt;
+        this.realName = realName;
     }
 
-    public SaltUser(String id, String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired,
-                    boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities, String salt) {
+    public SaltUser(String id, String username, String realName, String password, boolean enabled, boolean accountNonExpired,
+                    boolean credentialsNonExpired, boolean accountNonLocked,
+                    Collection<? extends GrantedAuthority> authorities, String salt) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
         this.id = id;
         this.salt = salt;
+        this.realName = realName;
     }
 
     public String getId() {

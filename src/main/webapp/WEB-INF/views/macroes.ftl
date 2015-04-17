@@ -42,8 +42,8 @@
 
 [#--//TODO with parameters--]
 [#macro showPagination path]
-<div class="tile color pagination-nice-scroll row">
-    <section class="tile color col-md-12">
+<div class="pagination-nice-scroll row panel-footer">
+    <section>
     [#local totalPage = (pagination.count / pagination.pageSize)?ceiling]
 
     [#if path?contains("?")]
@@ -53,10 +53,10 @@
     [/#if]
 
     [#if pagination.data?size > 0]
-    <div class="col-md-6">
+    <div class="col-sm-5">
         <div class="dataTables_info">总计 ${pagination.count} 条数据, 每页显示${pagination.pageSize}条,总计 ${totalPage}页</div>
     </div>
-    <div class="col-md-6">
+    <div class="col-sm-7">
             <ul class="pagination pagination-custom pull-right">
                 [#if pagination.page - 1 <= 0]
                     <li class="disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>

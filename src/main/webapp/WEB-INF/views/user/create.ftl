@@ -20,7 +20,6 @@
     <section class="container content">
         <div class="row">
             <form role="form" action="/user/create" method="post">
-                <div class="error-message" style="color: #ff0000;">${message}</div>
 
                 [@spring.bind "user.realName"/]
                 <div class="form-group">
@@ -53,9 +52,10 @@
                 [@spring.bind "user.sex"/]
                 <div class="form-group">
                     <select name="sex" class="form-control" placeholder="性别" required="true">
+                        [#assign status=(user.sex)?default("")/]
                         <option value="">请选择</option>
-                        <option value="0">女</option>
-                        <option value="1">男</option>
+                        <option value="0" [@mc.selected status "0" /]>女</option>
+                        <option value="1" [@mc.selected status "1" /]>男</option>
                     </select>
                     [@spring.showErrors "sex"/]
                 </div>
@@ -92,9 +92,17 @@
                     <input type="text" name="remark" class="form-control" placeholder="备注" value="${user.remark}"/>
                 </div>
 
-                <div class="footer pull-right">
-                    <button type="submit" class="btn bg-olive">创建</button>
-                    <a href="/user/list" class="btn btn-danger">返回</a>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <div class="col-sm-offset-8 col-sm-4">
+                            <button type="submit" class="btn btn-block bg-olive">创建</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="col-sm-4">
+                            <a href="/user/list" class="btn btn-block btn-danger">返回</a>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
