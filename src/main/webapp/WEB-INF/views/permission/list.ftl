@@ -19,6 +19,9 @@
 
 <section class="content margin-lr-10 thumbnail">
     <div class="row">
+
+        [@mc.showAlert /]
+
         <table class="table table-hover">
             <tr>
                 <th>编号</th>

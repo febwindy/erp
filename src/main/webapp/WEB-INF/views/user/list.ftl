@@ -19,6 +19,9 @@
 
     <section class="content margin-lr-10 thumbnail">
         <div class="row">
+
+            [@mc.showAlert /]
+
             <form class="form-inline">
                 <div class="form-group">
                     <div class="col-sm-3">

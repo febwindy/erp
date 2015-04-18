@@ -1,24 +1,21 @@
 [#-- 显示提示消息 --]
 [#macro showAlert]
     [#if alertMessage?? && (alertMessage.type)??]
-        [#switch alertMessage.type.getValue()]
-            [#case 0]
-                [#local alertClass = "alert-greensea"]
-                [#break]
-            [#case 1]
-                [#local alertClass = "alert-cyan"]
-                [#break]
-            [#case 2]
-                [#local alertClass = "alert-green"]
-                [#break]
-            [#case 3]
-                [#local alertClass = "alert-red"]
-                [#break]
-        [/#switch]
-    <div class="alert ${alertClass}">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <strong>${alertMessage.type.getName()}:</strong> ${alertMessage.message}
-    </div>
+        <div class="alert alert-info alert-dismissible fade in list-alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+
+            <strong>${alertMessage.type.getName()}!</strong>${alertMessage.message}.
+
+            <script type="text/javascript">
+                window.onload = function() {
+                    setTimeout(function(){
+                        $(".list-alert").alert('close');
+                    }, 5000);
+                }
+            </script>
+        </div>
     [/#if]
 [/#macro]
 
