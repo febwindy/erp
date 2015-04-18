@@ -39,8 +39,8 @@ public class PermissionController extends BaseController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ModelAndView create() throws Exception {
-        return new ModelAndView("/permission/create");
+    public ModelAndView create(@ModelAttribute("permission")CreatePermissionCommand command) throws Exception {
+        return new ModelAndView("/permission/create", "permission", command);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

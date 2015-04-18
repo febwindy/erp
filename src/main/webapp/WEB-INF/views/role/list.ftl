@@ -30,7 +30,7 @@
                 [#if pagination.data?size > 0]
                     [#list pagination.data as role]
                         <tr>
-                            <th scope="row">${list.index + 1}</th>
+                            <td>${role_index + 1}</td>
                             <td>${role.role}</td>
                             <td>${role.description}</td>
                             <td>
