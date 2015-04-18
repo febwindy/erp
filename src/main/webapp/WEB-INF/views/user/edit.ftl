@@ -1,4 +1,4 @@
-[@override name="title"]用户创建[/@override]
+[@override name="title"]用户编辑[/@override]
 
 [@override name="topResources"]
     [@super /]

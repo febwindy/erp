@@ -26,23 +26,23 @@
                 <ul class="treeview-menu">
                     <li><a href="/user/list"><i class="fa fa-angle-double-right"></i> 用户列表</a></li>
                     <li><a href="/user/create"><i class="fa fa-angle-double-right"></i> 用户创建</a></li>
-                    <li><a href="#"><i class="fa fa-angle-double-right"></i> 用户审核</a></li>
+                    <li><a href="/user/verified/list"><i class="fa fa-angle-double-right"></i> 用户审核</a></li>
                 </ul>
             </li>
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-male"></i>
-                    <span>资源管理</span>
+                    <i class="fa fa-users"></i>
+                    <span>角色管理</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-angle-double-right"></i> 资源列表</a></li>
-                    <li><a href="#"><i class="fa fa-angle-double-right"></i> 资源创建</a></li>
+                    <li><a href="/role/list"><i class="fa fa-angle-double-right"></i> 角色列表</a></li>
+                    <li><a href="/role/create"><i class="fa fa-angle-double-right"></i> 角色创建</a></li>
                 </ul>
             </li>
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-re"></i>
+                    <i class="fa fa-lock"></i>
                     <span>资源管理</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>

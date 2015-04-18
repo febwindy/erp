@@ -19,77 +19,106 @@
 
     <section class="container content">
         <div class="row">
-            <form role="form" action="/user/create" method="post">
+            <form role="form" class="form-horizontal" action="/user/create" method="post">
 
                 [@spring.bind "user.realName"/]
                 <div class="form-group">
-                    <input type="text" name="realName" class="form-control" placeholder="真实姓名" required="true"
-                           value="${user.realName}"/>
-                    [@spring.showErrors "realName"/]
+                    <label for="realName" class="col-sm-2 control-label">真实姓名:</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="realName" class="form-control" placeholder="真实姓名" required="true"
+                               value="${user.realName}"/>
+                        [@spring.showErrors "realName"/]
+                    </div>
                 </div>
 
                 [@spring.bind "user.username"/]
                 <div class="form-group">
-                    <input type="text" name="username" class="form-control" placeholder="用户名" required="true"
-                           value="${user.username}"/>
-                    [@spring.showErrors "username"/]
+                    <label for="username" class="col-sm-2 control-label">用户名:</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="username" class="form-control" placeholder="用户名" required="true"
+                               value="${user.username}"/>
+                        [@spring.showErrors "username"/]
+                    </div>
                 </div>
 
                 [@spring.bind "user.password"/]
                 <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="密码" required="true"
-                           value="${user.password}"/>
-                    [@spring.showErrors "password"/]
+                    <label for="password" class="col-sm-2 control-label">密码:</label>
+                    <div class="col-sm-9">
+                        <input type="password" name="password" class="form-control" placeholder="密码" value=""/>
+                        [@spring.showErrors "password"/]
+                    </div>
                 </div>
 
                 [@spring.bind "user.confirmPassword"/]
                 <div class="form-group">
-                    <input type="password" name="confirmPassword" class="form-control" placeholder="重复密码" required="true"
-                           value="${user.confirmPassword}"/>
-                    [@spring.showErrors "confirmPassword"/]
+                    <label for="confirmPassword" class="col-sm-2 control-label">重复密码:</label>
+                    <div class="col-sm-9">
+                        <input type="password" name="confirmPassword" class="form-control" placeholder="重复密码"
+                               value=""/>
+                        [@spring.showErrors "confirmPassword"/]
+                    </div>
                 </div>
 
                 [@spring.bind "user.sex"/]
                 <div class="form-group">
-                    <select name="sex" class="form-control" placeholder="性别" required="true">
-                        [#assign status=(user.sex)?default("")/]
-                        <option value="">请选择</option>
-                        <option value="0" [@mc.selected status "0" /]>女</option>
-                        <option value="1" [@mc.selected status "1" /]>男</option>
-                    </select>
-                    [@spring.showErrors "sex"/]
+                    <label for="sex" class="col-sm-2 control-label">性别:</label>
+                    <div class="col-sm-9">
+                        <select name="sex" class="form-control" placeholder="性别" required="true">
+                            [#assign status=(user.sex)?default("")/]
+                            <option value="">请选择</option>
+                            <option value="0" [@mc.selected status "0" /]>女</option>
+                            <option value="1" [@mc.selected status "1" /]>男</option>
+                        </select>
+                        [@spring.showErrors "sex"/]
+                    </div>
                 </div>
 
                 [@spring.bind "user.email"/]
                 <div class="form-group">
-                    <input type="email" name="email" class="form-control" placeholder="邮件" required="true"
-                           value="${user.email}"/>
-                    [@spring.showErrors "email"/]
+                    <label for="email" class="col-sm-2 control-label">邮件:</label>
+                    <div class="col-sm-9">
+                        <input type="email" name="email" class="form-control" placeholder="邮件" required="true"
+                               value="${user.email}"/>
+                        [@spring.showErrors "email"/]
+                    </div>
                 </div>
 
                 [@spring.bind "user.telephone"/]
                 <div class="form-group">
-                    <input type="tel" name="telephone" class="form-control" placeholder="电话" required="true"
-                           value="${user.telephone}"/>
-                    [@spring.showErrors "telephone"/]
+                    <label for="telephone" class="col-sm-2 control-label">电话:</label>
+                    <div class="col-sm-9">
+                        <input type="tel" name="telephone" class="form-control" placeholder="电话" required="true"
+                               value="${user.telephone}"/>
+                        [@spring.showErrors "telephone"/]
+                    </div>
                 </div>
 
                 [@spring.bind "user.idCard"/]
                 <div class="form-group">
-                    <input type="text" name="idCard" class="form-control" placeholder="身份证" required="true"
-                           value="${user.idCard}"/>
-                    [@spring.showErrors "idCard"/]
+                    <label for="idCard" class="col-sm-2 control-label">身份证:</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="idCard" class="form-control" placeholder="身份证" required="true"
+                               value="${user.idCard}"/>
+                        [@spring.showErrors "idCard"/]
+                    </div>
                 </div>
 
                 [@spring.bind "user.organization"/]
                 <div class="form-group">
-                    <input type="text" name="organization" class="form-control" placeholder="部门" required="true"
-                           value="${user.organization}"/>
-                    [@spring.showErrors "organization"/]
+                    <label for="organization" class="col-sm-2 control-label">部门:</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="organization" class="form-control" placeholder="部门" required="true"
+                               value="${user.organization}"/>
+                        [@spring.showErrors "organization"/]
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" name="remark" class="form-control" placeholder="备注" value="${user.remark}"/>
+                    <label for="remark" class="col-sm-2 control-label">备注:</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="remark" class="form-control" placeholder="备注" value="${user.remark}"/>
+                    </div>
                 </div>
 
                 <div class="form-group">

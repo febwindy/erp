@@ -33,7 +33,7 @@ public class UserVerifiedController extends BaseController {
     @RequestMapping("/list")
     public ModelAndView list(ListCommand command) throws Exception {
         Pagination<UserVerified> pagination = userVerifiedService.pagination(command);
-        return new ModelAndView("/verified/user/list", "pagination", pagination);
+        return new ModelAndView("/verified/list", "pagination", pagination);
     }
 
     @RequestMapping("/ok/{id}")

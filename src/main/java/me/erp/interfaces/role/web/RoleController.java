@@ -50,8 +50,8 @@ public class RoleController extends BaseController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ModelAndView create() throws Exception {
-        return new ModelAndView("/role/create");
+    public ModelAndView create(@ModelAttribute("role")CreateRoleCommand command) throws Exception {
+        return new ModelAndView("/role/create", "role", command);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

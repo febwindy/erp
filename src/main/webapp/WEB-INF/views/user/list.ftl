@@ -65,10 +65,10 @@
                                 <td>${user.telephone}</td>
                                 <td>${user.createdDate}</td>
                                 <td>
-                                    <a class="btn btn-success" href="/user/view/${user.id}">查看</a>
-                                    <a class="btn btn-info" href="/user/edit/${user.id}">编辑</a>
-                                    <a class="btn btn-danger" href="/user/delete/${user.id}">删除</a>
-                                    <a class="btn btn-primary" href="/user/authorization/${user.id}">授权角色</a>
+                                    <a class="btn btn-success btn-sm" href="/user/view/${user.id}">查看</a>
+                                    <a class="btn btn-info btn-sm" href="/user/edit/${user.id}">编辑</a>
+                                    <a class="btn btn-danger btn-sm" href="/user/delete/${user.id}">删除</a>
+                                    <a class="btn btn-primary btn-sm" href="/user/authorization/${user.id}">授权角色</a>
                                 </td>
                             </tr>
                         [/#list]

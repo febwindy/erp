@@ -1,4 +1,4 @@
-[@override name="title"]用户创建[/@override]
+[@override name="title"]用户详情[/@override]
 
 [@override name="topResources"]
     [@super /]
@@ -83,6 +83,22 @@
                     <input type="text" name="remark" class="form-control" placeholder="备注" value="${user.remark}"/>
                 </div>
             </div>
+
+            [#if user.roles?size > 0]
+                <div class="form-group">
+                    <label for="roles" class="col-sm-2 control-label">角色列表</label>
+                    <div class="col-sm-9" id="roles">
+                        [#list user.roles as role]
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="${role.id}" name="roles" checked/>
+                                    ${role.role} - ${role.description}
+                                </label>
+                            </div>
+                        [/#list]
+                    </div>
+                </div>
+            [/#if]
 
             <div class="form-group">
                 <div class="col-sm-6">
