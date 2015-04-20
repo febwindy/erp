@@ -4,19 +4,19 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="me.erp.domain.model.role.Role" table="gr_role">
+    <class name="me.erp.domain.model.role.Role" table="erp_role" lazy="true">
         <id name="id" column="id" length="32">
             <generator class="uuid"/>
         </id>
         <property name="role" column="role" length="32"/>
         <property name="description" column="description" length="255"/>
 
-        <set name="users" table="gr_user_role">
+        <set name="users" table="erp_user_role">
             <key column="role_id"/>
             <many-to-many class="me.erp.domain.model.user.User" column="user_id"/>
         </set>
 
-        <set name="permissions" table="gr_role_permission">
+        <set name="permissions" table="erp_role_permission">
             <key column="role_id"/>
             <many-to-many class="me.erp.domain.model.permission.Permission" column="permission_id"/>
         </set>

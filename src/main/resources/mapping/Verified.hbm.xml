@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="me.erp.domain.model.verified.AbstractVerified" abstract="true">
+    <class name="me.erp.domain.model.verified.AbstractVerified" abstract="true" lazy="true">
         <id name="id" column="id" length="32" type="java.lang.String">
             <generator class="uuid"/>
         </id>
@@ -15,7 +15,7 @@
         </property>
     </class>
 
-    <union-subclass name="me.erp.domain.model.verified.user.UserVerified" table="gr_verified_user"
+    <union-subclass name="me.erp.domain.model.verified.user.UserVerified" table="erp_verified_user"
                     extends="me.erp.domain.model.verified.AbstractVerified">
         <property name="username" column="username" length="32" unique="true"/>
         <property name="realName" column="real_name" length="32"/>

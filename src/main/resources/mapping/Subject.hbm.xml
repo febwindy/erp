@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="me.erp.domain.model.subject.Subject" table="erp_subject" lazy="true">
+        <id name="id" column="id" length="32">
+            <generator class="uuid"/>
+        </id>
+
+        <property name="subjectId" column="subject_id" length="32"/>
+
+        <property name="subjectName" column="subject_name" length="32"/>
+
+        <property name="updatedDate" column="updated_date"/>
+
+        <property name="createdDate" column="created_date"/>
+
+        <many-to-one name="operator" class="me.erp.domain.model.user.User" column="operator"/>
+
+        <property name="remark" column="remark" length="255"/>
+
+    </class>
+</hibernate-mapping>
