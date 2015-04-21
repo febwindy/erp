@@ -81,8 +81,8 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> 课程列表</a></li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> 课程创建</a></li>
+                        <li><a href="/subject/list"><i class="fa fa-angle-double-right"></i> 课程列表</a></li>
+                        <li><a href="/subject/create"><i class="fa fa-angle-double-right"></i> 课程创建</a></li>
                     </ul>
                 </li>
             </ul>

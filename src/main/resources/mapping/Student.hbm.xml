@@ -9,7 +9,7 @@
             <generator class="uuid"/>
         </id>
 
-        <property name="studentId" column="student_id" length="32"/>
+        <property name="studentId" column="student_id" length="32" unique="true"/>
 
         <property name="studentName" column="student_name" length="32"/>
 
