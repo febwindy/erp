@@ -22,6 +22,34 @@
 
         [@mc.showAlert /]
 
+        <form class="form-inline" action="/subject/list" method="post">
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <label for="subjectId">课程号:</label>
+                </div>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control pull-left" id="subjectId" name="subjectId" placeholder="请输入课程号"
+                           value="${subject.subjectId}">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <label for="subjectName">课程名:</label>
+                </div>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control pull-left" id="subjectName" name="subjectName" placeholder="请输入课程名"
+                           value="${subject.subjectName}">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-success">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+                    </button>
+                </div>
+            </div>
+        </form>
+        <br/>
         <table class="table table-hover">
             <tr>
                 <th>编号</th>

@@ -1,15 +1,15 @@
-package me.erp.interfaces.subject.web;
+package me.erp.interfaces.student.web;
 
-import me.erp.domain.model.subject.Subject;
+import me.erp.domain.model.student.Student;
 import me.erp.domain.service.ExistException;
 import me.erp.domain.service.NoFoundException;
-import me.erp.domain.service.subject.ISubjectService;
+import me.erp.domain.service.student.IStudentService;
 import me.erp.infrastructure.persistence.hibernate.generic.Pagination;
 import me.erp.interfaces.shared.web.AlertMessage;
 import me.erp.interfaces.shared.web.BaseController;
-import me.erp.interfaces.subject.web.command.CreateSubjectCommand;
-import me.erp.interfaces.subject.web.command.EditSubjectCommand;
-import me.erp.interfaces.subject.web.command.ListCommand;
+import me.erp.interfaces.student.web.command.CreateStudentCommand;
+import me.erp.interfaces.student.web.command.EditStudentCommand;
+import me.erp.interfaces.student.web.command.ListCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -21,92 +21,102 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.util.Locale;
 
 /**
- * Created by ivan_ on 2015/4/20.
+ * Created by ivan_ on 2015/4/21.
  */
 @Controller
-@RequestMapping("/subject")
-public class SubjectController extends BaseController {
+@RequestMapping("/student")
+public class StudentController extends BaseController {
 
     @Autowired
-    private ISubjectService subjectService;
+    private IStudentService studentService;
 
     @RequestMapping("/list")
-    public ModelAndView list(@ModelAttribute("subject")ListCommand command) throws Exception {
-        Pagination<Subject> pagination = subjectService.pagination(command);
-        return new ModelAndView("/subject/list", "pagination", pagination).addObject("subject", command);
+    public ModelAndView list(@ModelAttribute("student")ListCommand command) throws ExistException {
+        Pagination<Student> pagination = studentService.pagination(command);
+        return new ModelAndView("/student/list", "pagination", pagination)
+                .addObject("student", command);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ModelAndView create(@ModelAttribute("subject")CreateSubjectCommand command) throws Exception{
-        return new ModelAndView("/subject/create", "subject", command);
+    public ModelAndView create(@ModelAttribute("student")CreateStudentCommand command) throws Exception{
+        return new ModelAndView("/student/create", "student", command);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ModelAndView create(@Valid @ModelAttribute("subject")CreateSubjectCommand command,
+    public ModelAndView create(@Valid @ModelAttribute("student")CreateStudentCommand command,
                                RedirectAttributes redirectAttributes,
                                BindingResult bindingResult,
                                Locale locale) throws Exception{
 
-        int count = subjectService.countBySubjectId(command.getSubjectId());
+        AlertMessage alertMessage;
 
-        if (count >= 1) {
-            bindingResult.rejectValue("subjectId", "CreateSubjectCommand.subjectId.exist", new Object[]{command.getSubjectId()}, null);
+        Student student = studentService.findByStudentId(command.getStudentId());
+
+        if (null != student) {
+            bindingResult.rejectValue("studentId", "CreateStudentCommand.studentId.exist", new Object[]{command.getStudentId()}, null);
         }
 
         if (bindingResult.hasErrors()) {
-            return new ModelAndView("/subject/create", "subject", command);
+            return new ModelAndView("/student/create", "student", command);
         }
 
-        subjectService.create(command);
+        try {
+            studentService.create(command);
 
-        AlertMessage alertMessage = new AlertMessage(this.getMessage("default.create.success.message", new Object[]{command.getSubjectId()}, locale));
-        redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
+            alertMessage = new AlertMessage(this.getMessage("default.create.success.message", new Object[]{command.getStudentId()}, locale));
+            redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
 
-        return new ModelAndView("redirect:/subject/list");
+        } catch (ParseException e) {
+            alertMessage = new AlertMessage(this.getMessage("default.create.failed.message", new Object[]{command.getStudentId()}, locale));
+            redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
+        }
+
+        return new ModelAndView("redirect:/student/list");
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public ModelAndView edit(@PathVariable String id, RedirectAttributes redirectAttributes, Locale locale) throws ExistException {
+    public ModelAndView edit(@PathVariable String id, RedirectAttributes redirectAttributes, Locale locale) throws Exception{
 
         AlertMessage alertMessage;
-        Subject subject;
+        Student student;
 
         try {
-            subject = subjectService.findById(id);
+            student = studentService.findById(id);
         } catch (NoFoundException e) {
             alertMessage = new AlertMessage(this.getMessage("default.noFoundId.message", new Object[]{id}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
 
-            return new ModelAndView("redirect:/subject/list");
+            return new ModelAndView("redirect:/student/list");
         }
 
-        return new ModelAndView("/subject/edit", "subject", subject);
+        return new ModelAndView("/student/edit", "student", student);
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    public ModelAndView edit(@Valid @ModelAttribute("subject")EditSubjectCommand command,
+    public ModelAndView edit(@Valid @ModelAttribute("student")EditStudentCommand command,
                              RedirectAttributes redirectAttributes,
                              BindingResult bindingResult,
                              Locale locale) throws ExistException {
 
         AlertMessage alertMessage;
 
-        Subject subject = subjectService.findBySubjectId(command.getSubjectId());
+        Student student = studentService.findByStudentId(command.getStudentId());
 
-        if (null != subject && !subject.getId().equals(command.getId())) {
-            bindingResult.rejectValue("subjectId", "CreateSubjectCommand.subjectId.exist", new Object[]{command.getSubjectId()}, null);
+        if (null != student && !student.getId().equals(command.getId())) {
+            bindingResult.rejectValue("studentId", "EditStudentCommand.studentId.exist", new Object[]{command.getStudentId()}, null);
         }
 
         if (bindingResult.hasErrors()) {
-            return new ModelAndView("/subject/edit", "subject", command);
+            return new ModelAndView("/student/edit", "student", command);
         }
 
         try {
 
-            subjectService.edit(command);
+            studentService.edit(command);
 
             alertMessage = new AlertMessage(this.getMessage("default.edit.success.message", new Object[]{command.getId()}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
@@ -114,27 +124,30 @@ public class SubjectController extends BaseController {
         } catch (NoFoundException e) {
             alertMessage = new AlertMessage(this.getMessage("default.noFoundId.message", new Object[]{command.getId()}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
+        } catch (ParseException e) {
+            alertMessage = new AlertMessage(this.getMessage("default.create.failed.message", new Object[]{command.getStudentId()}, locale));
+            redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
         }
 
-        return new ModelAndView("redirect:/subject/list");
+        return new ModelAndView("redirect:/student/list");
     }
 
     @RequestMapping(value = "/view/{id}")
     public ModelAndView view(@PathVariable String id, RedirectAttributes redirectAttributes, Locale locale) throws ExistException {
 
         AlertMessage alertMessage;
-        Subject subject;
+        Student student;
 
         try {
-            subject = subjectService.findById(id);
+            student = studentService.findById(id);
         } catch (NoFoundException e) {
             alertMessage = new AlertMessage(this.getMessage("default.noFoundId.message", new Object[]{id}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
 
-            return new ModelAndView("redirect:/subject/list");
+            return new ModelAndView("redirect:/student/list");
         }
 
-        return new ModelAndView("/subject/view", "subject", subject);
+        return new ModelAndView("/student/view", "student", student);
     }
 
     @RequestMapping(value = "/delete/{id}")
@@ -143,11 +156,11 @@ public class SubjectController extends BaseController {
         AlertMessage alertMessage;
 
         try {
-            subjectService.delete(id);
+            studentService.delete(id);
         } catch (NoFoundException e) {
             alertMessage = new AlertMessage(this.getMessage("default.noFoundId.message", new Object[]{id}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
         }
-        return new ModelAndView("redirect:/subject/list");
+        return new ModelAndView("redirect:/student/list");
     }
 }

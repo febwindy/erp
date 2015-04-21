@@ -12,6 +12,7 @@ import me.erp.interfaces.subject.web.command.EditSubjectCommand;
 import me.erp.interfaces.subject.web.command.ListCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,11 +63,11 @@ public class SubjectService implements ISubjectService {
         List<Criterion> criterionList = new ArrayList<Criterion>();
 
         if (null != command.getSubjectId() && !StringUtils.isEmpty(command.getSubjectId())) {
-            criterionList.add(Restrictions.eq("subjectId", command.getSubjectId()));
+            criterionList.add(Restrictions.like("subjectId", command.getSubjectId(), MatchMode.ANYWHERE));
         }
 
         if (null != command.getSubjectName() && !StringUtils.isEmpty(command.getSubjectName())) {
-            criterionList.add(Restrictions.eq("subjectName", command.getSubjectName()));
+            criterionList.add(Restrictions.like("subjectName", command.getSubjectName(), MatchMode.ANYWHERE));
         }
 
         Criterion[] restrictions = null;

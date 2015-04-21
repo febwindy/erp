@@ -22,7 +22,7 @@
 
             [@mc.showAlert /]
 
-            <form class="form-inline">
+            <form class="form-inline" action="/user/list" method="post">
                 <div class="form-group">
                     <div class="col-sm-3">
                         <label for="username">用户名:</label>

@@ -9,9 +9,9 @@ public class ListCommand {
 
     private String subjectName;
 
-    private int page;
+    private int page = 1;
 
-    private int pageSize;
+    private int pageSize = 20;
 
     public String getSubjectId() {
         return subjectId;

@@ -15,6 +15,8 @@
 
         <property name="sex" column="sex"/>
 
+        <property name="birthDate" type="java.util.Date"/>
+
         <set name="subject" table="erp_student_subject">
             <key column="student_id"/>
             <many-to-many column="subject_id" class="me.erp.domain.model.subject.Subject"/>
