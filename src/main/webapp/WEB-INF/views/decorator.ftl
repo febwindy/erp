@@ -88,7 +88,7 @@
         [@block name="bottomResources"]
 
             <!-- jQuery 2.0.2 -->
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+            <script src="[@spring.url '/resources/js/jquery-1.11.2.min.js'/]"></script>
             <!-- jQuery UI 1.10.3 -->
             <script src="[@spring.url '/resources/js/jquery-ui-1.10.3.min.js'/]" type="text/javascript"></script>
             <!-- Bootstrap -->
