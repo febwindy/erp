@@ -138,7 +138,6 @@ public class StudentService implements IStudentService {
             throw new ParseException("出生日期转换出错", 0);
         }
 
-        student.setCreatedDate(new Date());
         student.setUpdatedDate(new Date());
         student.setRemark(command.getRemark());
 

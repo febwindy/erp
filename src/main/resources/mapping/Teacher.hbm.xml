@@ -20,6 +20,8 @@
             <many-to-many column="subject_id" class="me.erp.domain.model.subject.Subject"/>
         </set>
 
+        <property name="birthDate" column="birth_date"/>
+
         <property name="updatedDate" column="updated_date"/>
 
         <property name="createdDate" column="created_date"/>

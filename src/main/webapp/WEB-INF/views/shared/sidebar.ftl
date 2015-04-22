@@ -70,8 +70,8 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> 教师列表</a></li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> 教师创建</a></li>
+                        <li><a href="/teacher/list"><i class="fa fa-angle-double-right"></i> 教师列表</a></li>
+                        <li><a href="/teacher/create"><i class="fa fa-angle-double-right"></i> 教师创建</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
