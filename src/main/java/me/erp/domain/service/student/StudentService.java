@@ -3,13 +3,16 @@ package me.erp.domain.service.student;
 import me.erp.application.security.SaltUser;
 import me.erp.domain.model.student.IStudentRepository;
 import me.erp.domain.model.student.Student;
+import me.erp.domain.model.teacher.Teacher;
 import me.erp.domain.model.user.User;
 import me.erp.domain.service.NoFoundException;
+import me.erp.domain.service.teacher.ITeacherService;
 import me.erp.domain.service.user.IUserService;
 import me.erp.infrastructure.persistence.hibernate.generic.Pagination;
 import me.erp.interfaces.student.web.command.CreateStudentCommand;
 import me.erp.interfaces.student.web.command.EditStudentCommand;
 import me.erp.interfaces.student.web.command.ListCommand;
+import me.erp.interfaces.student.web.command.SelectSubjectCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
@@ -23,9 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by ivan_ on 2015/4/20.
@@ -39,6 +40,9 @@ public class StudentService implements IStudentService {
 
     @Autowired
     private IStudentRepository<Student, String> studentRepository;
+
+    @Autowired
+    private ITeacherService teacherService;
 
     @Override
     public Student findById(String id) {
@@ -148,5 +152,28 @@ public class StudentService implements IStudentService {
     public void delete(String id) {
         Student student = this.findById(id);
         studentRepository.delete(student);
+    }
+
+    @Override
+    public void selectSubject(SelectSubjectCommand command) {
+
+        Set<Teacher> teachers = new HashSet<Teacher>();
+
+        if (null != command.getTeachers() && !StringUtils.isEmpty(command.getTeachers())) {
+            String[] teacherIds = command.getTeachers().split(",");
+            for (String id : teacherIds) {
+                Teacher teacher = teacherService.findByTeacherId(id);
+                if (null != teacher) {
+                    teachers.add(teacher);
+                } else {
+                    throw new NoFoundException("教师资源[" + teacher.getTeacherId() + "]没有发现" );
+                }
+            }
+        }
+
+        Student student = this.findById(command.getId());
+        student.setTeachers(teachers);
+
+        studentRepository.update(student);
     }
 }

@@ -20,7 +20,8 @@ public class StudentRepository extends AbstractHibernateGenericRepository<Studen
 
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.add(Restrictions.eq("id", id))
-                .setFetchMode("operator", FetchMode.JOIN);
+                .setFetchMode("operator", FetchMode.JOIN)
+                .setFetchMode("teachers", FetchMode.JOIN);
 
         Object obj = criteria.uniqueResult();
 

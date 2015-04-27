@@ -8,6 +8,7 @@ import me.erp.interfaces.teacher.web.command.ListCommand;
 import me.erp.interfaces.teacher.web.command.SelectSubjectCommand;
 
 import java.text.ParseException;
+import java.util.List;
 
 /**
  * Created by ivan_ on 2015/4/20.
@@ -19,6 +20,8 @@ public interface ITeacherService {
     Teacher findByTeacherId(String teacherId);
 
     Pagination<Teacher> pagination(ListCommand command);
+
+    List<Teacher> findAllByFetchMode();
 
     void create(CreateTeacherCommand command) throws ParseException;
 

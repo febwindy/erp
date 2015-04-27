@@ -88,6 +88,11 @@ public class TeacherService implements ITeacherService {
     }
 
     @Override
+    public List<Teacher> findAllByFetchMode() {
+        return teacherRepository.findAllByFetchMode();
+    }
+
+    @Override
     public void create(CreateTeacherCommand command) throws ParseException {
 
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");

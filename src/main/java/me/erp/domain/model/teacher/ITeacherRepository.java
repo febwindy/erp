@@ -3,6 +3,7 @@ package me.erp.domain.model.teacher;
 import me.erp.infrastructure.persistence.hibernate.generic.IHibernateGenericRepository;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by ivan_ on 2015/4/20.
@@ -12,5 +13,7 @@ public interface ITeacherRepository<T, ID extends Serializable> extends IHiberna
     Teacher findById(String id);
 
     Teacher findByTeacherId(String teacherId);
+
+    List<Teacher> findAllByFetchMode();
 
 }

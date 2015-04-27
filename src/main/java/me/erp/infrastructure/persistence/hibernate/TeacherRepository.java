@@ -8,6 +8,8 @@ import org.hibernate.FetchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by ivan_ on 2015/4/20.
  */
@@ -37,5 +39,14 @@ public class TeacherRepository extends AbstractHibernateGenericRepository<Teache
         Object obj = criteria.uniqueResult();
 
         return (null != obj) ? (Teacher) obj : null;
+    }
+
+    @Override
+    public List<Teacher> findAllByFetchMode() {
+
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.setFetchMode("subjects", FetchMode.JOIN);
+
+        return criteria.list();
     }
 }
