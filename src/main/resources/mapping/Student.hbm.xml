@@ -17,9 +17,14 @@
 
         <property name="birthDate" type="java.util.Date"/>
 
-        <set name="subject" table="erp_student_subject">
+        <set name="subjects" table="erp_student_subject">
             <key column="student_id"/>
             <many-to-many column="subject_id" class="me.erp.domain.model.subject.Subject"/>
+        </set>
+
+        <set name="teachers" table="erp_student_subject">
+            <key column="student_id"/>
+            <many-to-many column="teacher_id" class="me.erp.domain.model.teacher.Teacher"/>
         </set>
 
         <property name="updatedDate" column="updated_date"/>

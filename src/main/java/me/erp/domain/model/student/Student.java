@@ -1,6 +1,7 @@
 package me.erp.domain.model.student;
 
 import me.erp.domain.model.subject.Subject;
+import me.erp.domain.model.teacher.Teacher;
 import me.erp.domain.model.user.User;
 
 import java.util.Date;
@@ -21,7 +22,9 @@ public class Student {
 
     private Date birthDate;
 
-    private Set<Subject> subject;
+    private Set<Subject> subjects;
+
+    private Set<Teacher> teachers;
 
     private Date updatedDate;
 
@@ -71,12 +74,20 @@ public class Student {
         this.birthDate = birthDate;
     }
 
-    public Set<Subject> getSubject() {
-        return subject;
+    public Set<Subject> getSubjects() {
+        return subjects;
     }
 
-    public void setSubject(Set<Subject> subject) {
-        this.subject = subject;
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    public Set<Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(Set<Teacher> teachers) {
+        this.teachers = teachers;
     }
 
     public Date getUpdatedDate() {
