@@ -1,7 +1,9 @@
 package me.erp.interfaces.teacher.web;
 
+import me.erp.domain.model.subject.Subject;
 import me.erp.domain.model.teacher.Teacher;
 import me.erp.domain.service.NoFoundException;
+import me.erp.domain.service.subject.ISubjectService;
 import me.erp.domain.service.teacher.ITeacherService;
 import me.erp.infrastructure.persistence.hibernate.generic.Pagination;
 import me.erp.interfaces.shared.web.AlertMessage;
@@ -9,6 +11,7 @@ import me.erp.interfaces.shared.web.BaseController;
 import me.erp.interfaces.teacher.web.command.CreateTeacherCommand;
 import me.erp.interfaces.teacher.web.command.EditTeacherCommand;
 import me.erp.interfaces.teacher.web.command.ListCommand;
+import me.erp.interfaces.teacher.web.command.SelectSubjectCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -21,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.text.ParseException;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -32,6 +36,9 @@ public class TeacherController extends BaseController {
 
     @Autowired
     private ITeacherService teacherService;
+
+    @Autowired
+    private ISubjectService subjectService;
 
     @RequestMapping("/list")
     public ModelAndView list(@ModelAttribute("teacher")ListCommand command) throws Exception {
@@ -160,6 +167,46 @@ public class TeacherController extends BaseController {
             alertMessage = new AlertMessage(this.getMessage("default.noFoundId.message", new Object[]{id}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
         }
+        return new ModelAndView("redirect:/teacher/list");
+    }
+
+    @RequestMapping(value = "/select/{id}", method = RequestMethod.GET)
+    public ModelAndView select(@PathVariable String id, RedirectAttributes redirectAttributes, Locale locale) throws Exception {
+
+        AlertMessage alertMessage;
+
+        List<Subject> subjects = subjectService.findAll();
+        Teacher teacher;
+
+        try {
+            teacher = teacherService.findById(id);
+        } catch (NoFoundException e) {
+            alertMessage = new AlertMessage(this.getMessage("default.noFoundId.message", new Object[]{id}, locale));
+            redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
+            return new ModelAndView("redirect:/teacher/list");
+        }
+
+        return new ModelAndView("/teacher/select_subject", "subjects", subjects)
+                .addObject("teacher", teacher);
+    }
+
+    @RequestMapping(value = "/select/{id}", method = RequestMethod.POST)
+    public ModelAndView select(@ModelAttribute("teacher")SelectSubjectCommand command,
+                               RedirectAttributes redirectAttributes,
+                               Locale locale) throws Exception {
+
+        try {
+            teacherService.select(command);
+        } catch (NoFoundException e) {
+            AlertMessage alertMessage = new AlertMessage(AlertMessage.MessageType.DANGER, this.getMessage("SelectSubjectCommand.failed.message",
+                    new Object[]{command.getTeacherName()}, locale));
+            redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
+        }
+
+        AlertMessage alertMessage = new AlertMessage(AlertMessage.MessageType.SUCCESS, this.getMessage("SelectSubjectCommand.success.message",
+                new Object[]{command.getTeacherName()}, locale));
+        redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
+
         return new ModelAndView("redirect:/teacher/list");
     }
 

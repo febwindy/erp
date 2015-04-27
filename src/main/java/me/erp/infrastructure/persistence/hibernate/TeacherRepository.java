@@ -20,7 +20,8 @@ public class TeacherRepository extends AbstractHibernateGenericRepository<Teache
 
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.add(Restrictions.eq("id", id))
-                .setFetchMode("operator", FetchMode.JOIN);
+                .setFetchMode("operator", FetchMode.JOIN)
+                .setFetchMode("subjects", FetchMode.JOIN);
 
         Object obj = criteria.uniqueResult();
 

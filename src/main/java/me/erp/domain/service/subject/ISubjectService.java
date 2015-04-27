@@ -6,6 +6,8 @@ import me.erp.interfaces.subject.web.command.CreateSubjectCommand;
 import me.erp.interfaces.subject.web.command.EditSubjectCommand;
 import me.erp.interfaces.subject.web.command.ListCommand;
 
+import java.util.List;
+
 /**
  * Created by ivan_ on 2015/4/20.
  */
@@ -16,6 +18,8 @@ public interface ISubjectService {
     Subject findBySubjectId(String id);
 
     Pagination<Subject> pagination(ListCommand command);
+
+    List<Subject> findAll();
 
     int countBySubjectId(String subjectId);
 

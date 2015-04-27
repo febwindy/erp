@@ -15,7 +15,7 @@
 
         <property name="sex" column="sex"/>
 
-        <set name="subject" table="erp_teacher_subject">
+        <set name="subjects" table="erp_teacher_subject">
             <key column="teacher_id"/>
             <many-to-many column="subject_id" class="me.erp.domain.model.subject.Subject"/>
         </set>

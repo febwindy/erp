@@ -21,7 +21,7 @@ public class Teacher {
 
     private Date birthDate;
 
-    private Set<Subject> subject;
+    private Set<Subject> subjects;
 
     private Date updatedDate;
 
@@ -71,12 +71,12 @@ public class Teacher {
         this.birthDate = birthDate;
     }
 
-    public Set<Subject> getSubject() {
-        return subject;
+    public Set<Subject> getSubjects() {
+        return subjects;
     }
 
-    public void setSubject(Set<Subject> subject) {
-        this.subject = subject;
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
     }
 
     public Date getUpdatedDate() {

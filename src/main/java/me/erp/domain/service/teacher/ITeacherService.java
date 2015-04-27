@@ -5,6 +5,7 @@ import me.erp.infrastructure.persistence.hibernate.generic.Pagination;
 import me.erp.interfaces.teacher.web.command.CreateTeacherCommand;
 import me.erp.interfaces.teacher.web.command.EditTeacherCommand;
 import me.erp.interfaces.teacher.web.command.ListCommand;
+import me.erp.interfaces.teacher.web.command.SelectSubjectCommand;
 
 import java.text.ParseException;
 
@@ -24,5 +25,7 @@ public interface ITeacherService {
     void edit(EditTeacherCommand command) throws ParseException;
 
     void delete(String id);
+
+    void select(SelectSubjectCommand command);
 
 }

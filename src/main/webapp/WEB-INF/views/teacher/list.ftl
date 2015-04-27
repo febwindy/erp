@@ -75,6 +75,7 @@
                             <td>
                                 <a class="btn btn-success btn-sm" href="/teacher/view/${teacher.id}">查看</a>
                                 <a class="btn btn-info btn-sm" href="/teacher/edit/${teacher.id}">编辑</a>
+                                <a class="btn btn-info btn-sm" href="/teacher/select/${teacher.id}">选课</a>
                                 <a class="btn btn-danger btn-sm" href="/teacher/delete/${teacher.id}">删除</a>
                             </td>
                         </tr>

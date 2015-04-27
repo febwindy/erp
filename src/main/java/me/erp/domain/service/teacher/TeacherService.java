@@ -1,15 +1,18 @@
 package me.erp.domain.service.teacher;
 
 import me.erp.application.security.SaltUser;
+import me.erp.domain.model.subject.Subject;
 import me.erp.domain.model.teacher.ITeacherRepository;
 import me.erp.domain.model.teacher.Teacher;
 import me.erp.domain.model.user.User;
 import me.erp.domain.service.NoFoundException;
+import me.erp.domain.service.subject.ISubjectService;
 import me.erp.domain.service.user.IUserService;
 import me.erp.infrastructure.persistence.hibernate.generic.Pagination;
 import me.erp.interfaces.teacher.web.command.CreateTeacherCommand;
 import me.erp.interfaces.teacher.web.command.EditTeacherCommand;
 import me.erp.interfaces.teacher.web.command.ListCommand;
+import me.erp.interfaces.teacher.web.command.SelectSubjectCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
@@ -23,9 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by ivan_ on 2015/4/20.
@@ -39,6 +40,9 @@ public class TeacherService implements ITeacherService {
 
     @Autowired
     private ITeacherRepository<Teacher, String> teacherRepository;
+
+    @Autowired
+    private ISubjectService subjectService;
 
     @Override
     public Teacher findById(String id) {
@@ -148,5 +152,29 @@ public class TeacherService implements ITeacherService {
     public void delete(String id) {
         Teacher teacher = this.findById(id);
         teacherRepository.delete(teacher);
+    }
+
+    @Override
+    public void select(SelectSubjectCommand command) {
+
+        Set<Subject> subjects = new HashSet<Subject>();
+
+        if (null != command.getSubjects() && !StringUtils.isEmpty(command.getSubjects())) {
+            String[] subjectIds = command.getSubjects().split(",");
+            for (String id : subjectIds) {
+                Subject subject = subjectService.findBySubjectId(id);
+                if (null != subject) {
+                    subjects.add(subject);
+                } else {
+                    throw new NoFoundException("课程资源[" + subject.getSubjectId() + "]没有发现" );
+                }
+            }
+        }
+
+        Teacher teacher = this.findById(command.getId());
+        teacher.setSubjects(subjects);
+
+        teacherRepository.update(teacher);
+
     }
 }
